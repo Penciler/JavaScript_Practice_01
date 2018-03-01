@@ -1,0 +1,52 @@
+<html>
+<head>
+  <script>
+    function createToDo() {
+      var todo = document.createElement("div");
+      var span = document.createElement("span");
+      var replaceButton = document.createElement("button");
+      var removeButton = document.createElement("button");
+
+      var input = document.getElementById("input").value;
+      if (input == "") {
+        input = "廢文一篇";
+      }
+      span.innerHTML = input;
+      todo.appendChild(span);
+
+      replaceButton.onclick = function() {
+        var input = document.getElementById("input").value;
+        if (input == "") {
+          alert("你並沒有輸入任何文字");
+          return;
+        }
+        this.parentNode.firstChild.innerHTML = input;
+        document.getElementById("input").value = ""; 
+      }
+
+      removeButton.onclick = function() {
+        while(this.parentNode){
+          this.parentNode.removeChild(this.parentNode.firstChild);
+        }
+      }
+
+      replaceButton.textContent = "R";
+      removeButton.textContent = "V";
+      todo.appendChild(replaceButton);
+      todo.appendChild(removeButton);
+      document.getElementById("todolist").appendChild(todo);
+    }
+
+
+
+  </script>
+</head>
+<body>
+  <input type="text" id="input">
+  <button onclick="createToDo()"> + </button>
+  <div id="todolist"></div>
+  <script>
+
+  </script>
+</body>
+</html>
