@@ -9,22 +9,31 @@
     image.src = state ? "img/on.jpg" : "img/off.jpg";
   }
 
-  var timeLeft = 5;
-  function countDownTimer() {
-    timeLeft = timeLeft - 1;
-    if (timeLeft <= 0) {
-      document.getElementById("image").src = "img/off.jpg";
-      clearInterval(id);
+
+  
+  function startCountdown(){
+    var setTime=document.getElementById("input").value;
+    var timeLeft=Number(setTime);
+    function counter(){
+      timeLeft = timeLeft - 1;
+      if (timeLeft <= 0) {
+        document.getElementById("image").src = "img/off.jpg";
+        clearInterval(id);
+      }
+      document.getElementById("timer").innerHTML = timeLeft; 
     }
-    document.getElementById("timer").innerHTML = timeLeft;
+
+    var id = setInterval(counter, 1000); 
+
   }
-  var id = setInterval(countDownTimer, 1000);
   </script>
 </head>
 <body>
   <!-- HTML 語法寫在這 -->
   <img id="image" src="img/on.jpg">
   <button class="button" onclick="toggleLight();">ON<br>-<br>OFF</button>
-  <div class="div" id="timer">5</div>
+  <button class="button" onclick="startCountdown();">Countdown</button>
+  <div class="div" id="timer"></div>
+  <input type="text" id="input">
 </body>
 </html>
