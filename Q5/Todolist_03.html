@@ -6,12 +6,18 @@
       var span = document.createElement("span");
       var replaceButton = document.createElement("button");
       var removeButton = document.createElement("button");
-
+      var urgent=document.getElementsByName("urg");
       var input = document.getElementById("input").value;
       if (input == "") {
         input = "廢文一篇";
       }
       span.innerHTML = input;
+      if(urgent[0].checked==true){
+        span.style.color="#d00";
+      }
+      else{
+        span.style.color="#50f442";
+      }
       todo.appendChild(span);
 
       replaceButton.onclick = function() {
@@ -25,8 +31,16 @@
       }
 
       removeButton.onclick = function() {
-        while(this.parentNode){
-          this.parentNode.removeChild(this.parentNode.firstChild);
+        var remove=confirm("是否確定完成？")
+        var buttons=this.parentNode.querySelector("button");
+        this.parentNode.style.color='#d00';
+        this.parentNode.style.fontFamily='Impact,Charcoal,sans-serif';
+        if(remove){
+          while(buttons){
+            buttons.remove();
+            buttons=this.parentNode.querySelector("button");
+          }
+
         }
       }
 
@@ -44,6 +58,10 @@
 <body>
   <input type="text" id="input">
   <button onclick="createToDo()"> + </button>
+  <form id="urgent">
+    <input type="radio" name="urg" value="0" checked> 緊急
+    <input type="radio" name="urg" value="1"> 不緊急
+  </form>
   <div id="todolist"></div>
   <script>
 
